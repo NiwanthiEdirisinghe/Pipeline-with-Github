@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo 'Task: Build the code using a build automation tool.'
+                    echo 'Task: Build the code using a build automation tool updated.'
                     echo 'Tool: Maven'
                 }
             }
