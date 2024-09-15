@@ -11,7 +11,9 @@ pipeline {
                 always {
                     mail to: 'niwanthiedirisinghe.95@gmail.com',
                          subject: "Build Stage Status: ${currentBuild.currentResult}",
-                         body: "The Build stage has completed with status: ${currentBuild.currentResult}."
+                         body: "The Build stage has completed with status: ${currentBuild.currentResult}.",
+                         attachLog: true,                
+                        attachmentsPattern: 'buildLog.txt'
                 }
             }
         }
