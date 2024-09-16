@@ -9,11 +9,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Build Stage Status: ${currentBuild.currentResult}",
-                         body: "The Build stage has completed with status: ${currentBuild.currentResult}.",
-                         attachLog: true,                
-                        attachmentsPattern: 'buildLog.txt'
+                    script {
+                        def buildLogContent = readFile 'buildLog.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Build Stage Status: ${currentBuild.currentResult}",
+                             body: """The Build stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nBuild Log:\n${buildLogContent}"""
+                    }
                 }
             }
         }
@@ -25,9 +27,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Unit and Integration Tests Status: ${currentBuild.currentResult}",
-                         body: "The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}."
+                    script {
+                        def testResultsContent = readFile 'testResults.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Unit and Integration Tests Status: ${currentBuild.currentResult}",
+                             body: """The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nTest Results:\n${testResultsContent}"""
+                    }
                 }
             }
         }
@@ -39,9 +45,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Code Analysis Status: ${currentBuild.currentResult}",
-                         body: "The Code Analysis stage has completed with status: ${currentBuild.currentResult}."
+                    script {
+                        def codeAnalysisContent = readFile 'codeAnalysis.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Code Analysis Status: ${currentBuild.currentResult}",
+                             body: """The Code Analysis stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nCode Analysis Results:\n${codeAnalysisContent}"""
+                    }
                 }
             }
         }
@@ -53,9 +63,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Security Scan Status: ${currentBuild.currentResult}",
-                         body: "The Security Scan stage has completed with status: ${currentBuild.currentResult}."
+                    script {
+                        def securityScanContent = readFile 'securityScan.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Security Scan Status: ${currentBuild.currentResult}",
+                             body: """The Security Scan stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nSecurity Scan Results:\n${securityScanContent}"""
+                    }
                 }
             }
         }
@@ -67,9 +81,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Deploy to Staging Status: ${currentBuild.currentResult}",
-                         body: "The Deploy to Staging stage has completed with status: ${currentBuild.currentResult}."
+                    script {
+                        def stagingDeploymentContent = readFile 'stagingDeployment.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Deploy to Staging Status: ${currentBuild.currentResult}",
+                             body: """The Deploy to Staging stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nStaging Deployment Log:\n${stagingDeploymentContent}"""
+                    }
                 }
             }
         }
@@ -81,9 +99,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Integration Tests on Staging Status: ${currentBuild.currentResult}",
-                         body: "The Integration Tests on Staging stage has completed with status: ${currentBuild.currentResult}."
+                    script {
+                        def stagingTestsContent = readFile 'stagingTests.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Integration Tests on Staging Status: ${currentBuild.currentResult}",
+                             body: """The Integration Tests on Staging stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nStaging Integration Tests Results:\n${stagingTestsContent}"""
+                    }
                 }
             }
         }
@@ -95,9 +117,13 @@ pipeline {
             }
             post {
                 always {
-                    mail to: 'niwanthiedirisinghe.95@gmail.com',
-                         subject: "Deploy to Production Status: ${currentBuild.currentResult}",
-                         body: "The Deploy to Production stage has completed with status: ${currentBuild.currentResult}."
+                    script {
+                        def productionDeploymentContent = readFile 'productionDeployment.txt'
+                        mail to: 'niwanthiedirisinghe.95@gmail.com',
+                             subject: "Deploy to Production Status: ${currentBuild.currentResult}",
+                             body: """The Deploy to Production stage has completed with status: ${currentBuild.currentResult}.
+                             \n\nProduction Deployment Log:\n${productionDeploymentContent}"""
+                    }
                 }
             }
         }
