@@ -11,10 +11,15 @@ pipeline {
                 always {
                     script {
                         def buildLogContent = readFile 'buildLog.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Build Stage Status: ${currentBuild.currentResult}",
-                             body: """The Build stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nBuild Log:\n${buildLogContent}"""
+                        archiveArtifacts artifacts: 'buildLog.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Build Stage Status: ${currentBuild.currentResult}",
+                            body: """The Build stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nBuild Log:\n${buildLogContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'buildLog.txt'
+                        )
                     }
                 }
             }
@@ -29,10 +34,15 @@ pipeline {
                 always {
                     script {
                         def testResultsContent = readFile 'testResults.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Unit and Integration Tests Status: ${currentBuild.currentResult}",
-                             body: """The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nTest Results:\n${testResultsContent}"""
+                        archiveArtifacts artifacts: 'testResults.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Unit and Integration Tests Status: ${currentBuild.currentResult}",
+                            body: """The Unit and Integration Tests stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nTest Results:\n${testResultsContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'testResults.txt'
+                        )
                     }
                 }
             }
@@ -47,10 +57,15 @@ pipeline {
                 always {
                     script {
                         def codeAnalysisContent = readFile 'codeAnalysis.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Code Analysis Status: ${currentBuild.currentResult}",
-                             body: """The Code Analysis stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nCode Analysis Results:\n${codeAnalysisContent}"""
+                        archiveArtifacts artifacts: 'codeAnalysis.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Code Analysis Status: ${currentBuild.currentResult}",
+                            body: """The Code Analysis stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nCode Analysis Results:\n${codeAnalysisContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'codeAnalysis.txt'
+                        )
                     }
                 }
             }
@@ -65,10 +80,15 @@ pipeline {
                 always {
                     script {
                         def securityScanContent = readFile 'securityScan.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Security Scan Status: ${currentBuild.currentResult}",
-                             body: """The Security Scan stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nSecurity Scan Results:\n${securityScanContent}"""
+                        archiveArtifacts artifacts: 'securityScan.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Security Scan Status: ${currentBuild.currentResult}",
+                            body: """The Security Scan stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nSecurity Scan Results:\n${securityScanContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'securityScan.txt'
+                        )
                     }
                 }
             }
@@ -83,10 +103,15 @@ pipeline {
                 always {
                     script {
                         def stagingDeploymentContent = readFile 'stagingDeployment.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Deploy to Staging Status: ${currentBuild.currentResult}",
-                             body: """The Deploy to Staging stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nStaging Deployment Log:\n${stagingDeploymentContent}"""
+                        archiveArtifacts artifacts: 'stagingDeployment.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Deploy to Staging Status: ${currentBuild.currentResult}",
+                            body: """The Deploy to Staging stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nStaging Deployment Log:\n${stagingDeploymentContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'stagingDeployment.txt'
+                        )
                     }
                 }
             }
@@ -101,10 +126,15 @@ pipeline {
                 always {
                     script {
                         def stagingTestsContent = readFile 'stagingTests.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Integration Tests on Staging Status: ${currentBuild.currentResult}",
-                             body: """The Integration Tests on Staging stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nStaging Integration Tests Results:\n${stagingTestsContent}"""
+                        archiveArtifacts artifacts: 'stagingTests.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Integration Tests on Staging Status: ${currentBuild.currentResult}",
+                            body: """The Integration Tests on Staging stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nStaging Integration Tests Results:\n${stagingTestsContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'stagingTests.txt'
+                        )
                     }
                 }
             }
@@ -119,10 +149,15 @@ pipeline {
                 always {
                     script {
                         def productionDeploymentContent = readFile 'productionDeployment.txt'
-                        mail to: 'niwanthiedirisinghe.95@gmail.com',
-                             subject: "Deploy to Production Status: ${currentBuild.currentResult}",
-                             body: """The Deploy to Production stage has completed with status: ${currentBuild.currentResult}.
-                             \n\nProduction Deployment Log:\n${productionDeploymentContent}"""
+                        archiveArtifacts artifacts: 'productionDeployment.txt', allowEmptyArchive: true
+                        emailext(
+                            to: 'niwanthiedirisinghe.95@gmail.com',
+                            subject: "Deploy to Production Status: ${currentBuild.currentResult}",
+                            body: """The Deploy to Production stage has completed with status: ${currentBuild.currentResult}.
+                            \n\nProduction Deployment Log:\n${productionDeploymentContent}""",
+                            attachLog: true,
+                            attachmentsPattern: 'productionDeployment.txt'
+                        )
                     }
                 }
             }
