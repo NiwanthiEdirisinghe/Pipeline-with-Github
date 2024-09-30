@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project updated'
+                echo 'Building the project'
                 writeFile file: 'buildLog.txt', text: 'Build log content here.'
             }
             post {
